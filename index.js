@@ -1,7 +1,7 @@
 // This function will randomly return rock paper or scissors
 function getComputerChoice(){
     //Generate a random number 0 to 2
-    let choice = Math.floor(2*Math.random());
+    const choice = Math.floor(2*Math.random());
     //return a string for each option corresoponding to each number
     switch(choice) {
         case 0:
@@ -19,7 +19,7 @@ function getComputerChoice(){
 function testGetComputerChoice() {
     for(let i = 0; i < 100; i++) {
         try{
-            let answer = getComputerChoice();
+            const answer = getComputerChoice();
             console.assert( answer == "rock" || answer == "paper" || answer == "scissors", `Unexpected answer: ${answer}`);
         }
         catch(e) {
@@ -32,13 +32,13 @@ testGetComputerChoice();
 //This function will take in the user's input and return it
 function getHumanChoice() {
     // Prompt the user to choose rock paper or scissors
-    let answer = prompt("Choose rock, paper, or scissors");
+    const answer = prompt("Choose rock, paper, or scissors");
     // return the answer as a lower case string
     return answer.toLowerCase()
 }
 //Test getHumanChoice
 function testGetHumanChoice() {
-    let tests = [
+    const tests = [
         {
             request: "Choose rock",
             response: "rock"
@@ -54,7 +54,7 @@ function testGetHumanChoice() {
     ]
     for(let i = 0; i < 3; i++) {
         console.log(tests[i].request);
-        let choice = getHumanChoice();
+        const choice = getHumanChoice();
         try{
             console.assert(choice == tests[i].response, `Choice is ${choice} should be ${tests[i].response}`);
             if (choice == tests[i].response) {
