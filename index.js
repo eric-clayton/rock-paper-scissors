@@ -67,7 +67,7 @@ function testGetHumanChoice() {
     }
     console.log("testGetHumanChoice finished")
 }
-testGetHumanChoice();
+//testGetHumanChoice();
 
 
 function playGame() {
@@ -110,3 +110,4 @@ function playGame() {
         playRound(humanChoice, computerChoice);
     }
 }
+playGame();
