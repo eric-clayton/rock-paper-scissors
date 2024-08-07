@@ -68,3 +68,29 @@ function testGetHumanChoice() {
     console.log("testGetHumanChoice finished")
 }
 testGetHumanChoice();
+
+let humanScore = 0;
+let computerScore = 0;
+// This function will play one round of the game
+function playRound(humanChoice, computerChoice) {
+    const rock = "rock";
+    const paper = "paper";
+    const scissors = "scissors";
+    // case where it is a tie return tie and no one gets any points
+    if(humanChoice == computerChoice) {
+        return console.log(`It's a tie! ${humanChoice} versus ${computerChoice}`)
+    }
+    // Case where human wins increment human score
+    if(humanChoice == rock && computerChoice == scissors ||
+        humanChoice == paper && computerChoice == rock ||
+        humanChoice == scissors && computerChoice == paper
+    ) {
+        console.log(`You win! ${humanChoice} beats ${computerChoice}`);
+        humanScore++;
+    }
+    //Case where human loses increment computer score
+    else{
+        console.log(`You lose! ${computerChoice} beats ${humanChoice}`);
+        computerScore;
+    }
+}
