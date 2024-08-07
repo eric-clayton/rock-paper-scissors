@@ -29,3 +29,42 @@ function testGetComputerChoice() {
     console.log('testGetComputerChoice finished');
 }
 testGetComputerChoice();
+//This function will take in the user's input and return it
+function getHumanChoice() {
+    // Prompt the user to choose rock paper or scissors
+    let answer = prompt("Choose rock, paper, or scissors");
+    // return the answer as a lower case string
+    return answer.toLowerCase()
+}
+//Test getHumanChoice
+function testGetHumanChoice() {
+    let tests = [
+        {
+            request: "Choose rock",
+            response: "rock"
+        },
+        {
+            request: "Choose paper",
+            response: "paper"
+        },
+        {
+            request: "Choose scissors",
+            response: "scissors"
+        }
+    ]
+    for(let i = 0; i < 3; i++) {
+        console.log(tests[i].request);
+        let choice = getHumanChoice();
+        try{
+            console.assert(choice == tests[i].response, `Choice is ${choice} should be ${tests[i].response}`);
+            if (choice == tests[i].response) {
+                console.log(`Correct response recieved ${choice}`)
+            }
+        }
+        catch(e) {
+            console.log(e);
+        }
+    }
+    console.log("testGetHumanChoice finished")
+}
+testGetHumanChoice();
