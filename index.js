@@ -23,7 +23,7 @@ function testGetComputerChoice() {
             console.assert( answer == "rock" || answer == "paper" || answer == "scissors", `Unexpected answer: ${answer}`);
         }
         catch(e) {
-            console.log()
+            console.log(e);
         }
     }
     console.log('testGetComputerChoice finished');
