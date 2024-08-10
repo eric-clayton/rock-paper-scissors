@@ -28,49 +28,16 @@ function testGetComputerChoice() {
     }
     console.log('testGetComputerChoice finished');
 }
-testGetComputerChoice();
-//This function will take in the user's input and return it
-function getHumanChoice() {
-    // Prompt the user to choose rock paper or scissors
-    const answer = prompt("Choose rock, paper, or scissors");
-    // return the answer as a lower case string
-    return answer.toLowerCase()
-}
-//Test getHumanChoice
-function testGetHumanChoice() {
-    const tests = [
-        {
-            request: "Choose rock",
-            response: "rock"
-        },
-        {
-            request: "Choose paper",
-            response: "paper"
-        },
-        {
-            request: "Choose scissors",
-            response: "scissors"
-        }
-    ]
-    for(let i = 0; i < 3; i++) {
-        console.log(tests[i].request);
-        const choice = getHumanChoice();
-        try{
-            console.assert(choice == tests[i].response, `Choice is ${choice} should be ${tests[i].response}`);
-            if (choice == tests[i].response) {
-                console.log(`Correct response recieved ${choice}`)
-            }
-        }
-        catch(e) {
-            console.log(e);
-        }
-    }
-    console.log("testGetHumanChoice finished")
-}
-//testGetHumanChoice();
 
 
 function playGame() {
+    const rockButton = document.querySelector('#rock');
+    const paperButton = document.querySelector('#paper');
+    const scissorsButton = document.querySelector('#scissors');
+
+    rockButton.addEventListener('click', () => handleClick('rock'));
+    paperButton.addEventListener('click', () =>handleClick('paper'));
+    scissorsButton.addEventListener('click', () => handleClick('scissors'));
     let humanScore = 0;
     let computerScore = 0;
     // This function will play one round of the game
@@ -78,36 +45,57 @@ function playGame() {
         const rock = "rock";
         const paper = "paper";
         const scissors = "scissors";
+        const results = document.querySelector('.results')
         // case where it is a tie return tie and no one gets any points
         if(humanChoice == computerChoice) {
-            return console.log(`It's a tie! ${humanChoice} versus ${computerChoice}`)
+            results.textContent = `It's a tie! ${humanChoice} versus ${computerChoice}`;
         }
         // Case where human wins increment human score
-        if(humanChoice == rock && computerChoice == scissors ||
+        else if(humanChoice == rock && computerChoice == scissors ||
             humanChoice == paper && computerChoice == rock ||
             humanChoice == scissors && computerChoice == paper
         ) {
-            console.log(`You win! ${humanChoice} beats ${computerChoice}`);
+            results.textContent = `You win! ${humanChoice} beats ${computerChoice}`;
             humanScore++;
         }
         //Case where human loses increment computer score
         else{
-            console.log(`You lose! ${computerChoice} beats ${humanChoice}`);
-            computerScore;
+            results.textContent = `You lose! ${computerChoice} beats ${humanChoice}`;
+            computerScore++;
+        }
+        updateScore();
+    }
+    function handleClick(humanChoice) {
+        playRound(humanChoice, getComputerChoice());
+        const gameResults = document.querySelector('#game-results');
+        const winner = checkWin();
+        if(winner) {
+            gameResults.textContent = `${winner} Wins! Final score is Player: ${humanScore} Computer: ${computerScore}`;
+            humanScore = 0;
+            computerScore = 0;
+        }
+        else {
+            gameResults.textContent = ''
         }
     }
-
-    for(let i = 0; i < 5; i++) {
-        let humanChoice = getHumanChoice();
-        const computerChoice = getComputerChoice();
-        while(humanChoice != 'rock' &&
-            humanChoice !='paper' &&
-            humanChoice != 'scissors'
-        ) {
-            console.log("Enter a valid choice:");
-            humanChoice = getHumanChoice();
+    function checkWin() {
+        const WIN_CONDITION = 5;
+        if(humanScore >= WIN_CONDITION) {
+            return 'Player';
         }
-        playRound(humanChoice, computerChoice);
+        else if (computerScore >= WIN_CONDITION) {
+            return 'Computer';
+        }
+        else {
+            return '';
+        }
+    }
+    function updateScore() {
+        const playerScoreElement = document.querySelector('#player-score');
+        const computerScoreElement = document.querySelector('#computer-score');
+        playerScoreElement.textContent = humanScore;
+        computerScoreElement.textContent = computerScore;
     }
 }
+
 playGame();
